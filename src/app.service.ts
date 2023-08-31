@@ -1,8 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from './database/prisma'
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello from Docker!';
+  constructor(private prisma: PrismaService) {}
+
+  async getHello() {
+    return { count: await this.prisma.user.count() }
   }
 }
