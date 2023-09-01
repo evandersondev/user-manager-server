@@ -7,9 +7,11 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { z } from 'zod'
+import { AuthGuard } from '../auth/auth.guard'
 
 const createUserBodySchema = z.object({
   name: z.string(),
@@ -39,12 +41,14 @@ export class UserController {
 
   @Get()
   @HttpCode(200)
+  @UseGuards(AuthGuard)
   async findAll() {
     return await this.service.findAll()
   }
 
   @Get(':id')
   @HttpCode(200)
+  @UseGuards(AuthGuard)
   async find(@Param() params: { id: string }) {
     const { id } = params
     return await this.service.find(id)
@@ -61,6 +65,7 @@ export class UserController {
 
   @Put()
   @HttpCode(200)
+  @UseGuards(AuthGuard)
   async update(@Body() body: UpdateUserBodyType) {
     const { id, photoUrl, role } = body
 
@@ -69,6 +74,7 @@ export class UserController {
 
   @Delete(':id')
   @HttpCode(204)
+  @UseGuards(AuthGuard)
   async delete(@Param() params: DeleteUserBodyType) {
     const { id } = params
 
