@@ -4,16 +4,21 @@ import { AuthCreateSessionRepository } from './repositories/auth-create-session.
 import { JwtModule } from '@nestjs/jwt'
 
 import { AuthController } from './auth.controller'
+import { AuthVerifySessionRepository } from './repositories/auth-verify-session.repository'
 
 @Module({
   imports: [
     JwtModule.register({
       global: true,
       secret: 'sercret_temporary',
-      signOptions: { expiresIn: '300s' },
+      signOptions: { expiresIn: '1 day' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthCreateSessionRepository],
+  providers: [
+    AuthService,
+    AuthCreateSessionRepository,
+    AuthVerifySessionRepository,
+  ],
 })
 export class AuthModule {}

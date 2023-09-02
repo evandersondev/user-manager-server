@@ -33,6 +33,13 @@ export class AuthCreateSessionRepository {
 
     return {
       access_token: await this.jwtService.signAsync(payload),
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        photoUrl: user.photoUrl,
+        role: user.role,
+      },
     }
   }
 }

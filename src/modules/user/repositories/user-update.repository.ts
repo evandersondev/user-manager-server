@@ -9,7 +9,7 @@ export class UserUpdateRepository {
   async hanlde(id: string, input: Prisma.UserUpdateInput) {
     return this.prisma.user.update({
       where: { id },
-      data: { photoUrl: input.photoUrl, role: input.role },
+      data: { photoUrl: input.photoUrl, role: input.role, name: input.name },
     })
   }
 }

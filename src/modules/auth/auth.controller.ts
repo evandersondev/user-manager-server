@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { z } from 'zod'
+import { Request as RequestExpress } from 'express'
 
 const createSessionSchema = z.object({
   email: z.string().email(),
@@ -18,5 +19,10 @@ export class AuthController {
     const { email, password } = createSessionSchema.parse(body)
 
     return this.service.createSession({ email, password })
+  }
+
+  @Get('verify')
+  async verifyToken(@Request() resquest: RequestExpress) {
+    return this.service.verifyToken(resquest)
   }
 }

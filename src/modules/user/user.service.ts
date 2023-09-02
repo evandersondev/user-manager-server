@@ -17,6 +17,7 @@ interface CreateUserBodyType {
 
 interface UpdateUserBodyType {
   id: string
+  name: string
   photoUrl?: string
   role: 'employee' | 'admin' | 'owner'
 }
@@ -73,8 +74,8 @@ export class UserService {
     })
   }
 
-  async update({ id, photoUrl, role }: UpdateUserBodyType) {
-    await this.userUpdateRepository.hanlde(id, { photoUrl, role })
+  async update({ id, photoUrl, role, name }: UpdateUserBodyType) {
+    await this.userUpdateRepository.hanlde(id, { photoUrl, role, name })
   }
 
   async delete(id: string) {

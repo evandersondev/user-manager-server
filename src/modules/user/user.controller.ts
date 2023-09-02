@@ -17,12 +17,13 @@ const createUserBodySchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  photoUrl: z.string().url().optional(),
+  photoUrl: z.string().optional(),
   role: z.enum(['employee', 'admin', 'owner']),
 })
 
 const updateUserBodySchema = z.object({
   id: z.string(),
+  name: z.string(),
   photoUrl: z.string().nullable(),
   role: z.enum(['employee', 'admin', 'owner']),
 })
@@ -63,13 +64,17 @@ export class UserController {
     await this.service.create({ name, email, password, photoUrl, role })
   }
 
-  @Put()
+  @Put(':id')
   @HttpCode(200)
   @UseGuards(AuthGuard)
-  async update(@Body() body: UpdateUserBodyType) {
-    const { id, photoUrl, role } = body
+  async update(
+    @Body() body: UpdateUserBodyType,
+    @Param() params: { id: string },
+  ) {
+    const { photoUrl, role, name } = body
+    const { id } = params
 
-    await this.service.update({ id, photoUrl, role })
+    await this.service.update({ id, photoUrl, role, name })
   }
 
   @Delete(':id')
