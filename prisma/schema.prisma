@@ -18,3 +18,8 @@ model User {
 
   @@map("users")
 }
+
+model Online {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  userEmail String @unique @map("user_email")
+}

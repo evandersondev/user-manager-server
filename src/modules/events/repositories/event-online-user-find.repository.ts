@@ -2,12 +2,10 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/modules/prisma/prisma.service'
 
 @Injectable()
-export class UserDeleteRepository {
+export class EventOnlineUserFindRepository {
   constructor(private prisma: PrismaService) {}
 
-  async hanlde(id: string) {
-    return await this.prisma.user.delete({
-      where: { id },
-    })
+  async hanlde(email: string) {
+    return await this.prisma.online.findUnique({ where: { userEmail: email } })
   }
 }
