@@ -23,3 +23,9 @@ model Online {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   userEmail String @unique @map("user_email")
 }
+
+model Session {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  token String @unique
+}

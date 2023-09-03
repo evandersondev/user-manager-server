@@ -30,9 +30,30 @@ export class AuthCreateSessionRepository {
     }
 
     const payload = { sub: user.id, username: user.name }
+    const token = await this.jwtService.signAsync(payload)
+
+    const session = await this.prisma.session.findUnique({
+      where: {
+        email,
+      },
+    })
+
+    if (session) {
+      await this.prisma.session.update({
+        where: { email },
+        data: { token },
+      })
+    } else {
+      await this.prisma.session.create({
+        data: {
+          email,
+          token,
+        },
+      })
+    }
 
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: token,
       user: {
         id: user.id,
         name: user.name,
