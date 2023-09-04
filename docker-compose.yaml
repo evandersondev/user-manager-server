@@ -1,18 +1,20 @@
 version: '3.8'
 
 services:
-  # api:
-  #   container_name: api-container
-  #   build: .
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - .:/home/node/app
-  #   network_mode: host
+  app:
+    build: .
+    container_name: app
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db
+    network_mode: host
 
   db:
-    container_name: db-container
     image: prismagraphql/mongo-single-replica:4.4.3-bionic
+    container_name: db
     restart: always
     ports:
       - '27017:27017'
@@ -20,4 +22,4 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: user-manager
-    # network_mode: host
+    network_mode: host

@@ -12,6 +12,7 @@ export class EventsGateway {
 
   @SubscribeMessage('users')
   async handleUpdateUser(client: Socket) {
+    client.emit('update-users')
     client.broadcast.emit('update-users')
   }
 
