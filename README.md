@@ -1,73 +1,53 @@
+<h1 align="center">
+
+USER MANAGER SERVER
+
+</h1>
+
+<br>
+
+<p align="center">Project test to at Tallos, using NestJS + Docker + Prisma</p>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+  </a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<hr />
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Getting started
 
-## Description
+- You need installed Docker and Docker Compose in Container or running in local.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Also need to clone the backend project from [user-manager-web](https://github.com/evandersondev/user-manager-web).
 
-## Installation
+- In your terminal, run the steps:
 
-```bash
-$ pnpm install
-```
+> `pnpm instal` **for install the modules**.
 
-## Running the app
+> `npx prisma generate` **for install the modules**.
 
-```bash
-# development
-$ pnpm run start
+> `pnpm dev`. **for running docker and up web app**.
 
-# watch mode
-$ pnpm run start:dev
+> `npx prisma db push`. **for running docker and up web app**.
 
-# production mode
-$ pnpm run start:prod
-```
+> You can access in your browser the web application http://localhost:3000/.
 
-## Test
+## Features
 
-```bash
-# unit tests
-$ pnpm run test
+Features used in the Project.
 
-# e2e tests
-$ pnpm run test:e2e
+- **<a href="https://nestjs.com/" target="_blank">NestJS</a>**
 
-# test coverage
-$ pnpm run test:cov
-```
+- **<a href="https://www.docker.com/" target="_blank">Docker</a>**
 
-## Support
+- **<a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a>**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **<a href="https://www.prisma.io/" target="_blank">Prisma</a>**
 
-## Stay in touch
+- **<a href="https://socket.io/" target="_blank">Socket IO</a>**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### - LICENSE
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License - see the <a href="https://opensource.org/licenses/MIT" target="_blank">LICENSE</a> page for details.
