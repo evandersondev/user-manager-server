@@ -6,7 +6,7 @@ import {
 import { Model } from 'mongoose'
 import { SessionDocument, SessionEntity } from './entities/session.entity'
 import { InjectModel } from '@nestjs/mongoose'
-import { UserDocument, UserEntity } from '../user/entities/user.entity'
+import { UserDocument, UserEntity } from '../users/entities/user.entity'
 import { compare } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { CreateSessionDto } from './dtos/create-session.dto'
