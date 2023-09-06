@@ -1,14 +1,20 @@
 import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { z } from 'zod'
-import { Request as RequestExpress } from 'express'
 
 const createSessionSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 })
 
+const requestSchema = z.object({
+  headers: z.object({
+    authorization: z.string(),
+  }),
+})
+
 type CreateSessionBodyType = z.infer<typeof createSessionSchema>
+type RequestType = z.infer<typeof requestSchema>
 
 @Controller('session')
 export class AuthController {
@@ -22,7 +28,7 @@ export class AuthController {
   }
 
   @Get('verify')
-  async verifyToken(@Request() resquest: RequestExpress) {
+  async verifyToken(@Request() resquest: RequestType) {
     return this.service.verifyToken(resquest)
   }
 }

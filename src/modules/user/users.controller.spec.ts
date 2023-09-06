@@ -96,11 +96,7 @@ describe('UsersController', () => {
         role: 'owner',
       }
 
-      jest
-        .spyOn(service, 'create')
-        .mockRejectedValue(
-          new ConflictException('User already exists with the same email.'),
-        )
+      jest.spyOn(service, 'create').mockRejectedValue(new ConflictException())
 
       await expect(controller.create(body)).rejects.toBeInstanceOf(
         ConflictException,

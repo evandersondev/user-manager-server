@@ -3,7 +3,6 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common'
-import { Request } from 'express'
 import { Model } from 'mongoose'
 import { SessionDocument, SessionEntity } from './entities/session.entity'
 import { InjectModel } from '@nestjs/mongoose'
@@ -11,6 +10,12 @@ import { UserDocument, UserEntity } from '../user/entities/user.entity'
 import { compare } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { CreateSessionDto } from './dtos/create-session.dto'
+
+interface Request {
+  headers?: {
+    authorization?: string
+  }
+}
 
 @Injectable()
 export class AuthService {
