@@ -1,43 +1,23 @@
 import { ConflictException, Injectable } from '@nestjs/common'
 import { hash } from 'bcryptjs'
-import { UserCreateRepository } from './repositories/user-create.repository'
-import { UserUpdateRepository } from './repositories/user-update.repository'
-import { UserDeleteRepository } from './repositories/user-delete.repository'
-import { UserFindRepository } from './repositories/user-find.repository'
-import { UserFindAllRepository } from './repositories/user-find-all.repository'
-import { UserFindByEmailRepository } from './repositories/user-find-by-email.repository'
-
-interface CreateUserBodyType {
-  name: string
-  email: string
-  password: string
-  photoUrl?: string
-  role: 'employee' | 'admin' | 'owner'
-}
-
-interface UpdateUserBodyType {
-  id: string
-  name: string
-  photoUrl?: string
-  role: 'employee' | 'admin' | 'owner'
-}
+import { Model } from 'mongoose'
+import { UserDocument, UserEntity } from './entities/user.entity'
+import { InjectModel } from '@nestjs/mongoose'
+import { CreateUserDto } from './dtos/create-user.dto'
+import { UpdateUserDto } from './dtos/update-user.dto'
 
 @Injectable()
 export class UserService {
   constructor(
-    private userCreateRepository: UserCreateRepository,
-    private userUpdateRepository: UserUpdateRepository,
-    private userDeleteRepository: UserDeleteRepository,
-    private userFindRepository: UserFindRepository,
-    private userFindAllRepository: UserFindAllRepository,
-    private userFindByEmailRepository: UserFindByEmailRepository,
+    @InjectModel(UserEntity.name)
+    private userModel: Model<UserDocument>,
   ) {}
 
   async findAll() {
-    const users = await this.userFindAllRepository.hanlde()
+    const users = await this.userModel.find().select('-password').exec()
 
     return users.map((user) => ({
-      id: user.id,
+      id: user._id,
       name: user.name,
       email: user.email,
       photoUrl: user.photoUrl,
@@ -46,9 +26,10 @@ export class UserService {
   }
 
   async find(id: string) {
-    const user = await this.userFindRepository.hanlde(id)
+    const user = await this.userModel.findById(id).select('-password').exec()
 
     return {
+      id: user._id,
       name: user.name,
       email: user.email,
       photoUrl: user.photoUrl,
@@ -56,29 +37,34 @@ export class UserService {
     }
   }
 
-  async create({ name, email, password, photoUrl, role }: CreateUserBodyType) {
-    const userExists = await this.userFindByEmailRepository.hanlde(email)
+  async findByEmail(email: string) {
+    return await this.userModel.findOne({ email }).select('-password').exec()
+  }
+
+  async create(user: CreateUserDto) {
+    const userExists = await this.userModel
+      .findOne({ email: user.email })
+      .exec()
 
     if (userExists) {
       throw new ConflictException('User already exists with the same email.')
     }
 
-    const passwordHashed = await hash(password, 8)
+    const passwordHashed = await hash(user.password, 8)
 
-    await this.userCreateRepository.hanlde({
-      name,
-      email,
-      role,
-      photoUrl,
+    await this.userModel.create({
+      ...user,
       password: passwordHashed,
     })
   }
 
-  async update({ id, photoUrl, role, name }: UpdateUserBodyType) {
-    await this.userUpdateRepository.hanlde(id, { photoUrl, role, name })
+  async update(id: string, user: UpdateUserDto) {
+    await this.userModel
+      .findByIdAndUpdate({ _id: id }, { $set: user }, { new: true })
+      .exec()
   }
 
   async delete(id: string) {
-    await this.userDeleteRepository.hanlde(id)
+    await this.userModel.deleteOne({ _id: id }).exec()
   }
 }

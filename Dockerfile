@@ -1,14 +1,11 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /home/node/app
 
-COPY package.json ./
-
-RUN npm install -g pnpm
-RUN pnpm install
+RUN npm i -g pnpm
 
 COPY . .
 
-EXPOSE 3000
+USER node
 
 CMD [ "pnpm", "start:dev" ]

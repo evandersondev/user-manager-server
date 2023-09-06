@@ -18,7 +18,7 @@ export class EventsGateway {
 
   @SubscribeMessage('users-online')
   async addUser(client: Socket, email: string) {
-    await this.service.add(email)
+    await this.service.create(email)
 
     client.emit('add-users')
     client.broadcast.emit('add-users')
@@ -26,7 +26,7 @@ export class EventsGateway {
 
   @SubscribeMessage('users-offline')
   async removeUser(client: Socket, email: string) {
-    await this.service.remove(email)
+    await this.service.delete(email)
 
     client.emit('remove-users')
     client.broadcast.emit('remove-users')

@@ -1,10 +1,11 @@
+import { SessionEntity, SessionSchema } from './entities/session.entity'
 import { Module } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { AuthCreateSessionRepository } from './repositories/auth-create-session.repository'
 import { JwtModule } from '@nestjs/jwt'
 
 import { AuthController } from './auth.controller'
-import { AuthVerifySessionRepository } from './repositories/auth-verify-session.repository'
+import { UserEntity, UserSchema } from '../user/entities/user.entity'
+import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
   imports: [
@@ -13,12 +14,12 @@ import { AuthVerifySessionRepository } from './repositories/auth-verify-session.
       secret: 'sercret_temporary',
       signOptions: { expiresIn: '1 day' },
     }),
+    MongooseModule.forFeature([
+      { name: UserEntity.name, schema: UserSchema },
+      { name: SessionEntity.name, schema: SessionSchema },
+    ]),
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    AuthCreateSessionRepository,
-    AuthVerifySessionRepository,
-  ],
+  providers: [AuthService],
 })
 export class AuthModule {}

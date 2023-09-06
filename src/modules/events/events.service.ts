@@ -1,35 +1,32 @@
 import { Injectable } from '@nestjs/common'
-import { EventOnlineUserRemoveRepository } from './repositories/event-online-user-remove.repository'
-import { EventOnlineUserRepository } from './repositories/event-online-user-add.repository'
-import { EventOnlineUsersAllRepository } from './repositories/event-online-users-all.repository'
-import { EventOnlineUserFindRepository } from './repositories/event-online-user-find.repository'
+import { Model } from 'mongoose'
+import { OnlineDocument, OnlineEntity } from './entities/online.entity'
+import { InjectModel } from '@nestjs/mongoose'
 
 @Injectable()
 export class EventsService {
   constructor(
-    private eventOnlineUserRemoveRepository: EventOnlineUserRemoveRepository,
-    private eventOnlineAddUserRepository: EventOnlineUserRepository,
-    private eventOnlineUsersAllRepository: EventOnlineUsersAllRepository,
-    private eventOnlineUserFindRepository: EventOnlineUserFindRepository,
+    @InjectModel(OnlineEntity.name)
+    private onlineModel: Model<OnlineDocument>,
   ) {}
 
-  async add(email: string) {
+  async create(email: string) {
     const user = await this.find(email)
 
     if (!user) {
-      await this.eventOnlineAddUserRepository.hanlde(email)
+      return await this.onlineModel.create({ email })
     }
   }
 
-  async remove(email: string) {
-    await this.eventOnlineUserRemoveRepository.hanlde(email)
+  async delete(email: string) {
+    await this.onlineModel.deleteOne({ email }).exec()
   }
 
-  async all() {
-    return await this.eventOnlineUsersAllRepository.hanlde()
+  async findAll() {
+    return await this.onlineModel.find().exec()
   }
 
   async find(email: string) {
-    return await this.eventOnlineUserFindRepository.hanlde(email)
+    return await this.onlineModel.findOne({ email }).exec()
   }
 }

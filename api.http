@@ -1,0 +1,64 @@
+@token = Bearer <TOKEN>
+
+
+####
+
+# Find all users
+GET http://localhost:3000/users
+Authorization: Bearer {{token}}
+
+###
+
+# Find user by id
+GET http://localhost:3000/users/64f7f36341222a2e184fa404
+Authorization: Bearer {{token}}
+
+
+###
+
+# Update user by id
+PUT http://localhost:3000/users/64f7e826a236bf58c30b47f7
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "User updated",
+  "role": "owner"
+}
+
+###
+
+# Delete user by id
+DELETE  http://localhost:3000/users/64f7e826a236bf58c30b47f7
+Authorization: Bearer {{token}}
+
+###
+
+# Create user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "User number #1",
+  "email": "user1@mail.com",
+  "password": "123456",
+  "role": "owner",
+  "photoUrl": "https://img.freepik.com/premium-photo/dog-red-jacket-sunglasses_832479-1179.jpg"
+}
+
+###
+
+# Create session
+POST http://localhost:3000/session
+Content-Type: application/json
+
+{
+  "email": "user1@mail.com",
+  "password": "123456"
+}
+
+###
+
+# Session verify
+GET http://localhost:3000/session/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGY3ZWUyNDY4YmYwYmE2NTMzY2JiNmEiLCJ1c2VybmFtZSI6IlVzZXIgbnVtYmVyICMxIiwiaWF0IjoxNjkzOTcwOTQ3LCJleHAiOjE2OTQwNTczNDd9.bgSSE_EROjYCoEXhuICS-TGhOjuwfwmsBF9GJCWpdQM

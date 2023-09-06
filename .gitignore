@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # Insert users for developer
 users.js
+
+# ENV
+.env

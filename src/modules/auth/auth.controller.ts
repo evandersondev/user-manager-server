@@ -18,7 +18,7 @@ export class AuthController {
   async createSession(@Body() body: CreateSessionBodyType) {
     const { email, password } = createSessionSchema.parse(body)
 
-    return this.service.createSession({ email, password })
+    return await this.service.createSession({ email, password })
   }
 
   @Get('verify')

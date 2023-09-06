@@ -74,7 +74,7 @@ export class UserController {
     const { photoUrl, role, name } = body
     const { id } = params
 
-    await this.service.update({ id, photoUrl, role, name })
+    await this.service.update(id, { photoUrl, role, name })
   }
 
   @Delete(':id')

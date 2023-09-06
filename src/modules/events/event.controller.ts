@@ -7,6 +7,6 @@ export class EventsController {
 
   @Get()
   async findAll() {
-    return await this.service.all()
+    return await this.service.findAll()
   }
 }
