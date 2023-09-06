@@ -7,7 +7,7 @@ import { CreateUserDto } from './dtos/create-user.dto'
 import { UpdateUserDto } from './dtos/update-user.dto'
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     @InjectModel(UserEntity.name)
     private userModel: Model<UserDocument>,
@@ -35,10 +35,6 @@ export class UserService {
       photoUrl: user.photoUrl,
       role: user.role,
     }
-  }
-
-  async findByEmail(email: string) {
-    return await this.userModel.findOne({ email }).select('-password').exec()
   }
 
   async create(user: CreateUserDto) {

@@ -9,7 +9,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common'
-import { UserService } from './user.service'
+import { UsersService } from './users.service'
 import { z } from 'zod'
 import { AuthGuard } from '../auth/auth.guard'
 
@@ -37,8 +37,8 @@ type UpdateUserBodyType = z.infer<typeof updateUserBodySchema>
 type DeleteUserBodyType = z.infer<typeof deleteUserBodySchema>
 
 @Controller('/users')
-export class UserController {
-  constructor(private service: UserService) {}
+export class UsersController {
+  constructor(private service: UsersService) {}
 
   @Get()
   @HttpCode(200)

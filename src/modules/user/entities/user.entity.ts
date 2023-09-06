@@ -7,7 +7,7 @@ type UserProps = {
   name: string
   email: string
   password: string
-  photoUrl: string
+  photoUrl?: string
   role: 'owner' | 'admin' | 'employee'
 }
 

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { UserModule } from './modules/user/user.module'
+import { UsersModule } from './modules/user/users.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { EventsModule } from './modules/events/events.module'
 import { MongooseModule } from '@nestjs/mongoose'
@@ -12,7 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose'
       envFilePath: ['.env'],
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
-    UserModule,
+    UsersModule,
     AuthModule,
     EventsModule,
   ],
