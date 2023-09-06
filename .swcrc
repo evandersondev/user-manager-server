@@ -1,0 +1,19 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "dynamicImport": false,
+      "decorators": true
+    },
+    "transform": {
+      "decoratorMetadata": true,
+      "useDefineForClassFields": true
+    },
+    "target": "ES2017",
+    "loose": false,
+    "externalHelpers": false,
+    // Requires v1.2.50 or upper and requires target to be es2016 or upper.
+    "keepClassNames": false
+  },
+  "minify": false
+}
