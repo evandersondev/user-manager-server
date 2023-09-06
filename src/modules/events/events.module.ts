@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { EventsGateway } from './events.gateway'
 import { EventsService } from './events.service'
-import { EventsController } from './event.controller'
+import { EventsController } from './events.controller'
 import { OnlineEntity, OnlineSchema } from './entities/online.entity'
 import { MongooseModule } from '@nestjs/mongoose'
 

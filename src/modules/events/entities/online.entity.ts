@@ -4,7 +4,6 @@ import { Document } from 'mongoose'
 export type OnlineDocument = OnlineEntity & Document
 
 type OnlineProps = {
-  name: string
   email: string
 }
 
